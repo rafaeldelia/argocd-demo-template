@@ -5,7 +5,8 @@
 replicaCount: 1
 
 image:
-  repository: claudioed/bets
+  #repository: claudioed/bets
+  repository: finhat2/demo-rest-template:1.0.1  
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: "otel"
@@ -40,7 +41,7 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port: 9999
+  port: 8080
 
 kong:
   enabled: true
@@ -49,15 +50,17 @@ ingress:
   enabled: true
   annotations:
     kubernetes.io/ingress.class: "kong"
+    konghq.com/strip-path: "false"
     konghq.com/override: bets-do-not-preserve-host
+    # ativando Prometheus, Rate Limit e Keycloak
     konghq.com/plugins: prometheus-bets,rl-by-header,bets-correlation-id,oidc-bets
 
   hosts:
     - paths:
-        - path: /api/bets
+        - path: /demo-rest-template # nome do path que quero que chame no Postman
           backend:
-            serviceName: bets
-            servicePort: 9999
+            serviceName: demo-rest-template # Lá dos services, do coletor
+            servicePort: 8080
   tls: []
   #  - secretName: chart-example-tls
   #    hosts:

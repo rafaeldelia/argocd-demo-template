@@ -53,7 +53,8 @@ ingress:
     konghq.com/strip-path: "false"
     konghq.com/override: bets-do-not-preserve-host
     # ativando Prometheus, Rate Limit e Keycloak
-    konghq.com/plugins: prometheus-bets,rl-by-header,bets-correlation-id,oidc-bets
+    #konghq.com/plugins: prometheus-bets,rl-by-header,bets-correlation-id,oidc-bets
+    konghq.com/plugins: oidc-bets
 
   hosts:
     - paths:
